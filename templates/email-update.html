@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{% url 'main:email-update' user.id %}" method="post">
+	{% csrf_token %}
+	<input type="email" name='email' placeholder="example@example.com">
+	<input type="submit" value="update">
+</form>
+
+{% endblock %}

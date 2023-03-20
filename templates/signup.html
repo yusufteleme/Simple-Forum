@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Sign Up Page</h1>
+	
+	{{form.errors}}
+
+  <form action="{% url 'main:signup' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <legend><h1>If you've already signed up,
+        <a href="{% url 'main:login' %}">click to login</a> </h1></legend>
+      
+      {{form.as_p}}
+      
+	    <input type="submit" value="Signup">
+	    
+    </fieldset>
+  </form>
+
+
+{% endblock %}

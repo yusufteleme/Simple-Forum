@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Your Profile</h3>
+
+<p>First Name: {{person.first_name}}</p>
+<p>Last Name: {{person.last_name}}</p>
+<p>Username: {{person.username}}</p>
+<p>Email Address: {{person.email}}</p>
+{% if person.username == user.username %}
+<form action="{% url 'main:email-update' user.id %}" method="get">
+	<input type="submit" value="Update Email">
+</form>
+{% endif %}
+<p>Posts You've Posted: {{person.post_count}}</p>
+<p>Entries You've Shared: {{person.entry_count}}</p>
+
+{% if user.username == person.username %}
+
+<form action="{% url 'main:change-password' %}" method="get">
+	<input type="submit" value="Change Your Password">
+</form>
+
+{% endif %}
+
+{% endblock %}

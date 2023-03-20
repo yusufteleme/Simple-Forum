@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div id="entry-list">
+	  {% if entries %}
+	    <ul>
+	    {% for entry in entries %}
+	        <li>{{ entry.content }} <small>{{entry.created_at|timesince}} ago</small>
+	          {% if entry.is_edited %}
+		          <small><i>edited</i></small>
+		        {% endif %}
+		        <a href="{% url 'main:account' entry.author.id %}">{{entry.author.username}}</a>
+	        </li>
+	    {% endfor %}
+	    </ul>
+		{% else %}
+      <p>This post has no entry.</p>
+		{% endif %}
+  </div>
+
+	<div id="entry-create">
+		{% if request.user.is_authenticated %}
+			<form action="{% url 'main:entry-create' %}" method="post">
+				{% csrf_token %}
+				<textarea name="entry" placeholder="Write here.."
+				          style="width: 482px; height: 159px;"></textarea><br>
+				<input type="hidden" name="post_id"  value="{{post_id}}">
+				<input type="submit"value="send">
+			</form>
+		{% endif %}
+	</div>
+
+{% endblock %}
